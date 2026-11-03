@@ -1,0 +1,61 @@
+name: Skills
+
+# Validates the Grundet skill source and builds the bundle on every PR and main push.
+# It never publishes a Release — that is gated behind a manual `skills-v*` tag
+# (see skills-release.yml). This keeps skills that reference not-yet-shipped MCP
+# tools out of users' hands until the tag is cut deliberately.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/Grundet.Skills/**"
+      - "tools/skills-gen/**"
+      - ".github/workflows/skills.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/Grundet.Skills/**"
+      - "tools/skills-gen/**"
+      - ".github/workflows/skills.yml"
+
+concurrency:
+  group: skills-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: tools/skills-gen/package.json
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: "pnpm"
+          cache-dependency-path: tools/skills-gen/pnpm-lock.yaml
+
+      - name: Install dependencies
+        working-directory: tools/skills-gen
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and validate skill bundle
+        working-directory: tools/skills-gen
+        run: pnpm run build
+
+      - name: Upload skill bundle artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: grundet-skills
+          path: tools/skills-gen/dist/*.zip
+          if-no-files-found: error

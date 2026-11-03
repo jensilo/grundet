@@ -1,0 +1,8 @@
+.next/
+node_modules/
+out/
+build/
+
+# pnpm lockfile — machine-generated, not Prettier-formatted (Prettier ignores
+# package-lock.json by default but not pnpm-lock.yaml).
+pnpm-lock.yaml

@@ -1,0 +1,8 @@
+{
+  "default": ["backend", "frontend"],
+  "checks": {
+    "backend": ".pi/checks/backend.sh",
+    "backend-build": ".pi/checks/backend-build.sh",
+    "frontend": ".pi/checks/frontend.sh"
+  }
+}

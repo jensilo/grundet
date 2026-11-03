@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn-variants.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ── Foundation: Slate (cool-tinted neutral spine) ─────────────────────── */
+  --color-slate-50: rgb(250 251 252);
+  --color-slate-100: rgb(242 244 247);
+  --color-slate-200: rgb(229 232 237);
+  --color-slate-300: rgb(207 212 220);
+  --color-slate-400: rgb(154 161 173);
+  --color-slate-500: rgb(107 114 128);
+  --color-slate-600: rgb(75 85 99);
+  --color-slate-700: rgb(48 55 68);
+  --color-slate-800: rgb(26 31 43);
+  --color-slate-900: rgb(14 17 23);
+  --color-slate-950: rgb(6 8 12);
+
+  /* ── Foundation: Indigo (primary brand accent) ─────────────────────────── */
+  /* Seeded user avatars use a separate, decorative vibrant palette in
+     lib/avatar-palette.ts (AVATAR_PALETTE) — a sanctioned identicon-only exception to the
+     hue ban. It is intentionally NOT derived from these tokens, so nothing to sync here. */
+  --color-indigo-50: rgb(251 245 252);
+  --color-indigo-100: rgb(244 229 247);
+  --color-indigo-200: rgb(229 198 236);
+  --color-indigo-300: rgb(203 148 214);
+  --color-indigo-400: rgb(167 91 183);
+  --color-indigo-500: rgb(97 15 127);
+  --color-indigo-600: rgb(83 11 110);
+  --color-indigo-700: rgb(67 8 90);
+  --color-indigo-800: rgb(50 7 68);
+  --color-indigo-900: rgb(33 5 45);
+  --color-indigo-950: rgb(20 3 28);
+
+  /* ── Foundation: Marketing accents (marketing surfaces only) ───────────── */
+  --color-cool-sky-50: rgb(232 243 252);
+  --color-cool-sky-100: rgb(200 226 247);
+  --color-cool-sky-500: rgb(93 169 233);
+  --color-cool-sky-700: rgb(31 111 176);
+
+  --color-bubblegum-50: rgb(255 233 236);
+  --color-bubblegum-100: rgb(255 202 208);
+  --color-bubblegum-500: rgb(255 105 120);
+  --color-bubblegum-700: rgb(194 41 58);
+
+  --color-emerald-50: rgb(224 250 241);
+  --color-emerald-100: rgb(182 242 221);
+  --color-emerald-500: rgb(6 214 160);
+  --color-emerald-700: rgb(2 138 102);
+
+  --color-espresso-50: rgb(244 232 229);
+  --color-espresso-100: rgb(226 197 189);
+  --color-espresso-500: rgb(85 27 20);
+  --color-espresso-700: rgb(58 18 12);
+
+  /* ── Foundation: Functional palette ───────────────────────────────────── */
+  --color-success-50: rgb(230 248 239);
+  --color-success-500: rgb(22 163 74);
+  --color-success-700: rgb(15 122 55);
+
+  --color-warning-50: rgb(254 246 225);
+  --color-warning-500: rgb(217 119 6);
+  --color-warning-700: rgb(146 82 10);
+
+  --color-destructive-50: rgb(253 233 233);
+  --color-destructive-500: rgb(220 38 38);
+  --color-destructive-700: rgb(164 28 28);
+
+  /* ── Foundation: Diff tokens ───────────────────────────────────────────── */
+  --color-diff-added-bg: rgb(230 248 239);
+  --color-diff-added-text: rgb(15 79 38);
+  --color-diff-removed-bg: rgb(253 233 233);
+  --color-diff-removed-text: rgb(95 20 20);
+  --color-diff-context-bg: rgb(250 251 252);
+  --color-diff-gutter-bg: rgb(242 244 247);
+
+  /* ── Semantic tokens → :root CSS vars (supports future dark mode) ──────── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-pressed: var(--primary-pressed);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  /* var(--font-inter) is injected by next/font at runtime; include string fallbacks
+     so font-family remains valid if the variable is missing. */
+  --font-sans: var(--font-inter, "Inter"), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-dm-serif, "DM Serif Display"), Georgia, serif;
+  --font-mono: var(--font-geist-mono, "Geist Mono"), "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Breakpoints ───────────────────────────────────────────────────────── */
+  /* Tailwind v4 defaults kept (sm 40 / md 48 / lg 64 / xl 80 / 2xl 96rem).
+     Custom large-presentation tier for the marketing page big-screen scaling. */
+  --breakpoint-3xl: 120rem; /* 1920px — large presentation / 4K-at-1x displays */
+
+  /* ── Radius (Foundation fixed values, not calc-based) ──────────────────── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (cool-tinted, slate-900-based) ────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgb(14 17 23 / 0.04);
+  --shadow-md: 0 4px 12px rgb(14 17 23 / 0.06), 0 1px 2px rgb(14 17 23 / 0.04);
+  --shadow-lg: 0 16px 32px rgb(14 17 23 / 0.08), 0 4px 8px rgb(14 17 23 / 0.04);
+  --shadow-xl: 0 32px 64px rgb(14 17 23 / 0.12), 0 8px 16px rgb(14 17 23 / 0.06);
+
+  /* ── Motion tokens ─────────────────────────────────────────────────────── */
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Light mode: Foundation semantic values ────────────────────────────────── */
+:root {
+  --background: rgb(250 251 252); /* slate-50  */
+  --foreground: rgb(14 17 23); /* slate-900 */
+  --card: rgb(250 251 252); /* slate-50  */
+  --card-foreground: rgb(14 17 23); /* slate-900 */
+  --popover: rgb(250 251 252); /* slate-50  */
+  --popover-foreground: rgb(14 17 23); /* slate-900 */
+  --primary: rgb(97 15 127); /* indigo-500 */
+  --primary-foreground: rgb(250 251 252); /* slate-50  */
+  --primary-hover: rgb(167 91 183); /* indigo-400 */
+  --primary-pressed: rgb(83 11 110); /* indigo-600 */
+  --secondary: rgb(242 244 247); /* slate-100 */
+  --secondary-foreground: rgb(14 17 23); /* slate-900 */
+  --muted: rgb(242 244 247); /* slate-100 */
+  --muted-foreground: rgb(107 114 128); /* slate-500 */
+  --accent: rgb(251 245 252); /* indigo-50 */
+  --accent-foreground: rgb(67 8 90); /* indigo-700 */
+  --destructive: rgb(220 38 38); /* destructive-500 */
+  --border: rgb(229 232 237); /* slate-200 */
+  --input: rgb(207 212 220); /* slate-300 */
+  --ring: rgb(97 15 127); /* indigo-500 */
+}
+
+/* Dark mode reserved — not implemented in v1. */
+.dark {
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  button,
+  a {
+    cursor: pointer;
+  }
+  ::selection {
+    background-color: rgb(244 229 247); /* indigo-100 */
+    color: rgb(33 5 45); /* indigo-900 */
+  }
+}
+
+@keyframes diff-highlight-flash {
+  0%,
+  75% {
+    background-color: var(--color-diff-added-bg);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes publish-pulse {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes publish-flash {
+  0% {
+    background-color: rgb(182 242 221); /* emerald-100 */
+  }
+  100% {
+    background-color: var(--color-diff-added-bg);
+  }
+}
+
+@keyframes mesh-draw-in {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.mesh-tri {
+  stroke-dashoffset: 1;
+  transition:
+    fill 180ms var(--ease-out),
+    stroke-width 180ms var(--ease-out);
+}
+.mesh-tri.built {
+  animation: mesh-draw-in 1100ms var(--ease-out) forwards;
+}
+.mesh-tri:hover {
+  stroke-width: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,13 @@
+@Grundet.Api_HostAddress = http://localhost:8080
+
+### Health check (DB connectivity ping, unauthenticated)
+GET {{Grundet.Api_HostAddress}}/health
+Accept: application/json
+
+###
+
+### OpenAPI spec (sanity check that the app started and endpoints are registered)
+GET {{Grundet.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###

@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: grundet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_dev
+      GRUNDET_MIGRATOR_USER: grundet_migrator
+      GRUNDET_MIGRATOR_PASSWORD: grundet_migrator_dev
+      GRUNDET_API_USER: grundet_api
+      GRUNDET_API_PASSWORD: grundet_api_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  maildev:
+    image: maildev/maildev:latest
+    ports:
+      - "1080:1080"   # Web UI → http://localhost:1080
+      - "1025:1025"   # SMTP
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

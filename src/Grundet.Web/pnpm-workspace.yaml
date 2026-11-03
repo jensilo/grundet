@@ -1,0 +1,18 @@
+# pnpm settings for grundet-web. As of pnpm 11 the `pnpm` field in
+# package.json is no longer read — overrides and build-script allow-lists
+# live here. See https://pnpm.io/settings.
+
+# Security pins for transitive deps (carried over from the npm `overrides`
+# added during the 2026-06 Dependabot triage).
+overrides:
+  postcss: ^8.5.10
+  js-yaml: ^4.2.0
+  esbuild: ^0.28.1
+
+# Native packages whose install/build scripts pnpm must run. pnpm blocks
+# postinstall scripts by default; these need theirs (sharp → Next.js image
+# optimization, esbuild → vite/vitest, unrs-resolver → eslint import resolver).
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true

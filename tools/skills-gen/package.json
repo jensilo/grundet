@@ -1,0 +1,18 @@
+{
+  "name": "grundet-skills-gen",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Builds the deterministic Grundet skill bundle (grundet-<version>.zip) from src/Grundet.Skills.",
+  "packageManager": "pnpm@11.10.0",
+  "scripts": {
+    "build": "node generate.mjs",
+    "validate": "node generate.mjs --validate-only"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "archiver": "^8.0.0"
+  }
+}

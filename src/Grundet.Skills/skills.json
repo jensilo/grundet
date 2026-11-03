@@ -1,0 +1,7 @@
+{
+  "name": "grundet",
+  "version": "0.1.0",
+  "description": "Connect to a Grundet workspace over its MCP server and read versioned product intent (requirements): set up the connection, discover projects, and read requirements with their acceptance criteria, rationale, and full version history.",
+  "dir": "grundet",
+  "entry": "SKILL.md"
+}
